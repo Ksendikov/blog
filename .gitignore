@@ -77,7 +77,7 @@ docs/_build/
 # PyBuilder
 target/
 
-
+stepicBlog_venv
 ### Django ###
 *.log
 *.pot
@@ -87,3 +87,5 @@ local_settings.py
 
 .env
 db.sqlite3
+content/
+setenv.sh

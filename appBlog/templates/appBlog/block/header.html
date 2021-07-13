@@ -1,0 +1,17 @@
+<div class="container-fluid home-slider">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-color: #e6e6fa!important">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 style="color: #343a40">
+                        {% if post.h1  %}
+                            {{ post.h1 }}
+                        {% else  %}
+                            {{ title }}
+                        {% endif %}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
