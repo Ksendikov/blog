@@ -42,12 +42,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'stepicBlog.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'media/appBlog/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'stepicBlog.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database

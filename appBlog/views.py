@@ -1,13 +1,14 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import View
-from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth import authenticate, login
+from django.core.mail import BadHeaderError, send_mail
 from django.core.paginator import Paginator
-from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect, HttpResponse
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.views import View
 from taggit.models import Tag
-from .models import Post, Comment
-from .forms import SigUpForm, SignInForm, FeedBackForm, CommentForm
+
+from .forms import CommentForm, FeedBackForm, SignInForm, SigUpForm
+from .models import Comment, Post
 
 
 class MainView(View):
@@ -47,7 +48,8 @@ class PostDetailView(View):
             text = request.POST['text']
             username = self.request.user
             post = get_object_or_404(Post, url=slug)
-            comment = Comment.objects.create(post=post, username=username, text=text)
+            comment = Comment.objects.create(post=post, username=username,
+                                             text=text)
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         return render(request, 'appBlog/post_detail.html', context={
             'comment_form': comment_form
@@ -110,7 +112,8 @@ class FeedBackView(View):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             try:
-                send_mail(f'От {name} | {subject}', message, from_email, ['myborkingplace@gmail.com'])
+                send_mail(f'От {name} | {subject}', message,
+                          from_email, ['myborkingplace@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Невалидный заголовок')
             return HttpResponseRedirect('success')
