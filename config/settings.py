@@ -4,7 +4,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -26,11 +25,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appBlog',
+    'apps.appBlog',
+    'apps.custom_auth',
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
 ]
+
+AUTH_USER_MODEL = 'custom_auth.AppUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -116,6 +118,7 @@ STATICFILES_DIRS = [
 
 STATIC_URL = os.path.join(BASE_DIR, '/static/')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

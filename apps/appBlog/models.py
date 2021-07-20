@@ -1,8 +1,9 @@
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from apps.custom_auth.models import AppUser
 
 
 class Post(models.Model):
@@ -13,7 +14,7 @@ class Post(models.Model):
     content = RichTextUploadingField()
     image = models.ImageField()
     created_at = models.DateField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     tag = TaggableManager()
 
     def __str__(self):
@@ -23,7 +24,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
-    username = models.ForeignKey(User, on_delete=models.CASCADE,
+    username = models.ForeignKey(AppUser, on_delete=models.CASCADE,
                                  related_name='user_name')
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)

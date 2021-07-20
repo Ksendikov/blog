@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from apps.custom_auth.models import AppUser
 
 from .models import Comment
 
@@ -43,7 +43,7 @@ class SigUpForm(forms.Form):
             )
 
     def save(self):
-        user = User.objects.create_user(
+        user = AppUser.objects.create_user(
             username=self.cleaned_data['username'],
             password=self.cleaned_data['password'],
         )
